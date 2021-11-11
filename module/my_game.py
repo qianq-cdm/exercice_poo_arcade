@@ -1,6 +1,7 @@
 # Importer arcade
 import arcade
 from module.balle import Balle
+from module.rectangle import Rectangle
 
 
 class MyGame(arcade.Window):
@@ -19,6 +20,7 @@ class MyGame(arcade.Window):
         # Si vous avez des listes de sprites, il faut les créer ici et les
         # initialiser à None.
         self.balle_list = None
+        self.rectangle_list = None
 
 
     def setup(self):
@@ -29,6 +31,7 @@ class MyGame(arcade.Window):
         # C'est ici que vous allez créer vos listes de sprites et vos sprites.
         # C'est aussi ici que vous charger les sons de votre jeu.
         self.balle_list = []
+        self.rectangle_list = []
 
     def on_draw(self):
         """
@@ -44,6 +47,9 @@ class MyGame(arcade.Window):
         for balle in self.balle_list:
             balle.draw()
 
+        for rectangle in self.rectangle_list:
+            rectangle.draw()
+
     def on_update(self, delta_time):
         """
         Toute la logique pour déplacer les objets de votre jeu et de
@@ -54,6 +60,9 @@ class MyGame(arcade.Window):
         """
         for balle in self.balle_list:
             balle.update()
+
+        for rectangle in self.rectangle_list:
+            rectangle.update()
 
     def on_mouse_press(self, x, y, button, key_modifiers):
         """
@@ -66,6 +75,6 @@ class MyGame(arcade.Window):
         if button == arcade.MOUSE_BUTTON_LEFT:
             self.balle_list.append(Balle(self.width, self.height, x, y))
         elif button == arcade.MOUSE_BUTTON_RIGHT:
-            pass
+            self.rectangle_list.append(Rectangle(self.width, self.height, x, y))
         else:
             pass
