@@ -1,5 +1,6 @@
 # Importer arcade
 import arcade
+from module.balle import Balle
 
 
 class MyGame(arcade.Window):
@@ -17,6 +18,8 @@ class MyGame(arcade.Window):
 
         # Si vous avez des listes de sprites, il faut les créer ici et les
         # initialiser à None.
+        self.balle_list = None
+
 
     def setup(self):
         """
@@ -25,7 +28,7 @@ class MyGame(arcade.Window):
         """
         # C'est ici que vous allez créer vos listes de sprites et vos sprites.
         # C'est aussi ici que vous charger les sons de votre jeu.
-        pass
+        self.balle_list = []
 
     def on_draw(self):
         """
@@ -38,6 +41,8 @@ class MyGame(arcade.Window):
         arcade.start_render()
 
         # Invoquer la méthode "draw()" de vos sprites ici.
+        for balle in self.balle_list:
+            balle.draw()
 
     def on_update(self, delta_time):
         """
@@ -47,38 +52,8 @@ class MyGame(arcade.Window):
         Paramètre:
             - delta_time : le nombre de milliseconde depuis le dernier update.
         """
-        pass
-
-    def on_key_press(self, key, key_modifiers):
-        """
-        Cette méthode est invoquée à chaque fois que l'usager tape une touche
-        sur le clavier.
-        Paramètres:
-            - key: la touche enfoncée
-            - key_modifiers: est-ce que l'usager appuie sur "shift" ou "ctrl" ?
-
-        Pour connaître la liste des touches possibles:
-        http://arcade.academy/arcade.key.html
-        """
-        pass
-
-    def on_key_release(self, key, key_modifiers):
-        """
-        Méthode invoquée à chaque fois que l'usager enlève son doigt d'une touche.
-        Paramètres:
-            - key: la touche relâchée
-            - key_modifiers: est-ce que l'usager appuie sur "shift" ou "ctrl" ?
-        """
-        pass
-
-    def on_mouse_motion(self, x, y, delta_x, delta_y):
-        """
-        Méthode invoquée lorsque le curseur de la souris se déplace dans la fenêtre.
-        Paramètres:
-            - x, y: les coordonnées de l'emplacement actuel de la sourir
-            - delta_X, delta_y: le changement (x et y) depuis la dernière fois que la méthode a été invoqué.
-        """
-        pass
+        for balle in self.balle_list:
+            balle.update()
 
     def on_mouse_press(self, x, y, button, key_modifiers):
         """
@@ -88,14 +63,9 @@ class MyGame(arcade.Window):
             - button: le bouton de la souris appuyé
             - key_modifiers: est-ce que l'usager appuie sur "shift" ou "ctrl" ?
         """
-        pass
-
-    def on_mouse_release(self, x, y, button, key_modifiers):
-        """
-        Méthode invoquée lorsque l'usager relâche le bouton cliqué de la souris.
-        Paramètres:
-            - x, y: coordonnées où le bouton a été relâché
-            - button: le bouton de la souris relâché
-            - key_modifiers: est-ce que l'usager appuie sur "shift" ou "ctrl" ?
-        """
-        pass
+        if button == arcade.MOUSE_BUTTON_LEFT:
+            self.balle_list.append(Balle(self.width, self.height, x, y))
+        elif button == arcade.MOUSE_BUTTON_RIGHT:
+            pass
+        else:
+            pass
