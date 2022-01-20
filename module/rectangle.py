@@ -31,7 +31,8 @@ class Rectangle:
         self.change_x = random.randint(-10, 10)
         self.change_y = random.randint(-10, 10)
         # Le couleur de rectangle
-        self.color = arcade.csscolor.AZURE
+        self.color_list = [arcade.color.WHITE, arcade.color.AZURE, arcade.color.ROYAL_BLUE]
+        self.color = random.choice(self.color_list)
         # L'angle de rectangle
         self.angle = random.randint(0, 360)
 

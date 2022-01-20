@@ -29,7 +29,8 @@ class Balle:
         # La grandeur de la balle
         self.rayon = random.randint(10, 30)
         # La couleur de la balle
-        self.color = arcade.csscolor.AZURE
+        self.color_list = [arcade.color.WHITE, arcade.color.AZURE, arcade.color.ROYAL_BLUE]
+        self.color = random.choice(self.color_list)
 
     def update(self):
         """
